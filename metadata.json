@@ -1,0 +1,13 @@
+{
+  "name": "Spotify Dynamic Island",
+  "description": "Apple-inspired Dynamic Island pill and expanded media controller for Spotify and MPRIS players in GNOME Shell, featuring sound-reactive waveforms, live synchronized lyrics, album art vignette backgrounds, and fluid spring animations.",
+  "uuid": "spotify-dynamic-island@mayankjain92.github.io",
+  "settings-schema": "org.gnome.shell.extensions.spotify-dynamic-island",
+  "shell-version": [
+    "45",
+    "46",
+    "47"
+  ],
+  "url": "https://github.com/mayankjain92/spotify-dynamic-island",
+  "version": 1
+}

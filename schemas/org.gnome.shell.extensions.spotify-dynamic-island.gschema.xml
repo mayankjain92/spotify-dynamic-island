@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="spotify-dynamic-island">
+  <schema id="org.gnome.shell.extensions.spotify-dynamic-island" path="/org/gnome/shell/extensions/spotify-dynamic-island/">
+    
+    <key name="target-player" type="s">
+      <default>'all'</default>
+      <summary>Target Media Player</summary>
+      <description>Target media player: 'all' for all MPRIS players with Spotify prioritized, or 'spotify' for Spotify exclusively</description>
+    </key>
+
+    <key name="pill-position" type="s">
+      <default>'center'</default>
+      <summary>Panel Position</summary>
+      <description>Position in the GNOME top bar: 'center', 'left', or 'right'</description>
+    </key>
+
+    <key name="pill-display-mode" type="s">
+      <default>'lyrics'</default>
+      <summary>Pill Display Mode</summary>
+      <description>Display mode in the compact pill: 'lyrics' for live singing lyrics line, or 'title' for song title and artist</description>
+    </key>
+
+    <key name="show-visualizer" type="b">
+      <default>true</default>
+      <summary>Equalizer Visualizer</summary>
+      <description>Whether to show animated equalizer bars on the compact pill during playback</description>
+    </key>
+
+    <key name="enable-ambient-glow" type="b">
+      <default>true</default>
+      <summary>Ambient Art Tint</summary>
+      <description>Whether to sample dominant album art color and project ambient tint on the compact pill and card rim</description>
+    </key>
+
+    <key name="card-background-style" type="s">
+      <default>'cover-art'</default>
+      <summary>Card Background Style</summary>
+      <description>Style of card background: 'cover-art' for album cover with vignette fade, 'ambient' for ambient color gradient, or 'black' for pure pitch black</description>
+    </key>
+
+    <key name="progress-style" type="s">
+      <default>'wavy'</default>
+      <summary>Progress Bar Style</summary>
+      <description>Style of music progress bar: 'wavy' for Samsung OneUI sound-reactive wave, or 'straight' for clean straight bar</description>
+    </key>
+
+  </schema>
+</schemalist>

@@ -1,0 +1,279 @@
+/* ==========================================================================
+   Apple-Design Dynamic Island Stylesheet
+   - Deep OLED Pitch-Black (#000000) solid surface
+   - Zero background blur, zero gradient haze, zero diffuse glow outside border
+   - Crisp 1px keyline borders
+   - SF Pro / Inter typography with strict contrast hierarchy
+   - Solid white circular play/pause button
+   - Apple Control Center style volume pill slider
+   ========================================================================== */
+
+/* Typography & Global Resets */
+.dynamic-island-pill,
+.dynamic-island-card {
+    font-family: "Inter Display", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+    -st-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/* ==========================================================================
+   Top Panel Dynamic Island Pill (Compact Presentation)
+   ========================================================================== */
+
+.dynamic-island-pill {
+    background-color: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+    padding: 3px 10px;
+    margin: 4px 6px;
+    spacing: 8px;
+    transition-duration: 0ms !important;
+    box-shadow: none !important;
+    -st-shadow: none !important;
+}
+
+.dynamic-island-pill:hover {
+    background-color: #000000;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Cover Art / Icon in Pill */
+.pill-art-bin {
+    border-radius: 9999px;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pill-icon {
+    icon-size: 15px;
+    color: #1db954;
+}
+
+/* Track Label in Pill */
+.pill-track-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    max-width: 220px;
+}
+
+/* Equalizer Bars in Pill */
+.pill-eq-box {
+    spacing: 2px;
+    height: 14px;
+    margin-left: 2px;
+}
+
+.pill-eq-bar {
+    width: 2.5px;
+    height: 3px;
+    border-radius: 1.5px;
+    background-color: #1db954;
+    transition-duration: 100ms;
+}
+
+/* ==========================================================================
+   Dynamic Island Dropdown Card (Expanded Presentation)
+   ========================================================================== */
+
+/* Completely eliminate all default GNOME popup-menu shadows, borders, arrow & blur */
+.dynamic-island-menu,
+.dynamic-island-menu.popup-menu,
+.dynamic-island-menu.popup-menu-boxpointer,
+.dynamic-island-menu.popup-menu-content,
+.popup-menu.dynamic-island-menu,
+.popup-menu-boxpointer.dynamic-island-menu,
+.popup-menu-content.dynamic-island-menu {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    -st-shadow: none !important;
+    -arrow-rise: 0px !important;
+    -arrow-border-width: 0px !important;
+    -arrow-background-color: transparent !important;
+    -arrow-border-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.dynamic-island-menu .popup-menu-item,
+.dynamic-island-menu .popup-menu-item:hover,
+.dynamic-island-menu .popup-menu-item:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    -st-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* The Clean Solid Pitch-Black Dynamic Island Card */
+.dynamic-island-card {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 28px;
+    padding: 18px 20px;
+    width: 350px;
+    spacing: 14px;
+    box-shadow: none !important;
+    -st-shadow: none !important;
+}
+
+/* Album Art & Title Row */
+.island-track-row {
+    spacing: 16px;
+    margin-top: 2px;
+}
+
+.island-album-art {
+    width: 76px;
+    height: 76px;
+    border-radius: 14px;
+    background-size: cover;
+    background-position: center;
+    background-color: #121215;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none !important;
+    -st-shadow: none !important;
+}
+
+.island-track-details {
+    spacing: 4px;
+    y-align: center;
+}
+
+.island-title-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    max-width: 235px;
+    letter-spacing: -0.2px;
+}
+
+.island-artist-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 235px;
+}
+
+.island-album-label {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.42);
+    max-width: 235px;
+}
+
+/* Scrubber / Progress Bar */
+.island-progress-box {
+    spacing: 4px;
+    margin-top: 2px;
+}
+
+.island-progress-scrubber {
+    height: 20px;
+}
+
+.island-time-box {
+    margin-top: 1px;
+}
+
+.island-time-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    font-feature-settings: "tnum";
+}
+
+/* Media Controls Row */
+.island-controls-box {
+    spacing: 18px;
+    x-align: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
+}
+
+.island-ctrl-btn {
+    border-radius: 9999px;
+    padding: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.08);
+    transition-duration: 150ms;
+    box-shadow: none !important;
+    -st-shadow: none !important;
+}
+
+.island-ctrl-btn:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+.island-ctrl-icon {
+    icon-size: 18px;
+}
+
+/* Active state for toggle buttons (Shuffle, Repeat) */
+.island-ctrl-btn.active {
+    color: #1db954;
+    background-color: rgba(29, 185, 84, 0.22);
+}
+
+/* Apple Solid White Circular Play/Pause Button */
+.island-play-btn {
+    border-radius: 9999px;
+    width: 46px;
+    height: 46px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0;
+    box-shadow: none !important;
+    -st-shadow: none !important;
+    transition-duration: 150ms;
+}
+
+.island-play-btn:hover {
+    background-color: #e8e8ed;
+}
+
+.island-play-icon {
+    icon-size: 20px;
+    color: #000000;
+}
+
+/* ==========================================================================
+   Apple Control Center Volume Slider
+   ========================================================================== */
+
+.island-volume-box {
+    spacing: 12px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    y-align: center;
+}
+
+.island-volume-icon {
+    icon-size: 14px;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.island-volume-slider {
+    height: 18px;
+}
+
+
+/* ==========================================================================
+   Apple Music Style Live Synced Lyrics (Cairo / Pango)
+   ========================================================================== */
+
+.lyrics-widget {
+    height: 160px;
+    margin: 4px 0;
+    padding: 0;
+}
