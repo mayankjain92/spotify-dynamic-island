@@ -21,27 +21,21 @@ An Apple-inspired Dynamic Island pill and expanded media controller for Spotify 
 
 ## Installation
 
-### From Source
+### Method 1: One-Line Installer (Recommended)
 
-1. Clone or copy this repository to your local GNOME extensions directory:
-   ```bash
-   git clone https://github.com/mayankjain92/spotify-dynamic-island.git ~/.local/share/gnome-shell/extensions/spotify-dynamic-island@mayankjain92.github.io
-   ```
+Run this in your terminal:
+```bash
+git clone https://github.com/mayankjain92/spotify-dynamic-island.git /tmp/spotify-dynamic-island && cd /tmp/spotify-dynamic-island && ./install.sh
+```
 
-2. Compile the GSettings schemas:
-   ```bash
-   glib-compile-schemas ~/.local/share/gnome-shell/extensions/spotify-dynamic-island@mayankjain92.github.io/schemas
-   ```
+### Method 2: Install via Extension Manager (GUI)
 
-3. Enable the extension:
-   ```bash
-   gnome-extensions enable spotify-dynamic-island@mayankjain92.github.io
-   ```
+1. Download the release `.zip` from [GitHub Releases](https://github.com/mayankjain92/spotify-dynamic-island/releases).
+2. Open the **Extension Manager** app on GNOME.
+3. Click the menu button (top right) ➔ **Install from Archive...**
+4. Select the `.zip` file. Done!
 
-4. Open preferences:
-   ```bash
-   gnome-extensions prefs spotify-dynamic-island@mayankjain92.github.io
-   ```
+### Method 3: Manual Clone
 
 ## License
 
