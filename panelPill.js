@@ -279,7 +279,7 @@ class DynamicIslandIndicator extends PanelMenu.Button {
 
     _stopVisualizer() {
         if (this._eqTimer) {
-            GLib.source_remove(this._eqTimer);
+            GLib.Source.remove(this._eqTimer);
             this._eqTimer = null;
         }
 

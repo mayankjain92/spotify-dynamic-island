@@ -246,7 +246,7 @@ export const LyricsWidget = GObject.registerClass({
 
     destroy() {
         if (this._tickId) {
-            GLib.source_remove(this._tickId);
+            GLib.Source.remove(this._tickId);
             this._tickId = 0;
         }
         super.destroy();

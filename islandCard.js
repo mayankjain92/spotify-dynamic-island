@@ -475,7 +475,7 @@ export class IslandCard {
         this._buildUI();
 
         // Smooth fluid spring expansion animation with zero flicker/double-opening
-        this._menu.connect('open-state-changed', (m, isOpen) => {
+        this._menuOpenStateId = this._menu.connect('open-state-changed', (m, isOpen) => {
             if (isOpen) {
                 this._updateVolumeDisplay(this._currentVolume);
                 this._syncCardWidgets();
@@ -998,7 +998,7 @@ export class IslandCard {
 
     _stopAnimation() {
         if (this._tickId) {
-            GLib.source_remove(this._tickId);
+            GLib.Source.remove(this._tickId);
             this._tickId = null;
         }
     }
@@ -1034,6 +1034,10 @@ export class IslandCard {
 
     destroy() {
         this._stopAnimation();
+        if (this._menuOpenStateId && this._menu) {
+            this._menu.disconnect(this._menuOpenStateId);
+            this._menuOpenStateId = null;
+        }
         if (this._bgSettingId && this._settings) {
             this._settings.disconnect(this._bgSettingId);
             this._bgSettingId = null;
