@@ -4,8 +4,6 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Pango from 'gi://Pango';
 import Cairo from 'gi://cairo';
-import Gdk from 'gi://Gdk?version=4.0';
-import GdkPixbuf from 'gi://GdkPixbuf';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import { LyricsWidget } from './lyricsView.js';
 
@@ -318,29 +316,14 @@ export const CardBackgroundCanvas = GObject.registerClass({
         });
 
         this._bgStyle = 'cover-art';
-        this._pixbuf = null;
         this._colorData = null;
 
         this.connect('repaint', () => this._onRepaint());
     }
 
-    setCover(filePath, colorData, bgStyle) {
+    setCover(colorData, bgStyle) {
         this._colorData = colorData;
         this._bgStyle = bgStyle || 'cover-art';
-
-        if (this._currentPath !== filePath) {
-            this._currentPath = filePath;
-            if (filePath && GLib.file_test(filePath, GLib.FileTest.EXISTS)) {
-                try {
-                    this._pixbuf = GdkPixbuf.Pixbuf.new_from_file(filePath);
-                } catch (_) {
-                    this._pixbuf = null;
-                }
-            } else {
-                this._pixbuf = null;
-            }
-        }
-
         this.queue_repaint();
     }
 
@@ -362,36 +345,11 @@ export const CardBackgroundCanvas = GObject.registerClass({
         cr.closePath();
         cr.clip();
 
-        // 2. Solid Pitch-Black Opaque Base (100% opacity, zero background window bleed)
-        cr.setSourceRGB(0, 0, 0);
-        cr.paint();
-
-        if (this._bgStyle === 'cover-art' && this._pixbuf) {
-            // Draw album cover scaled & centered in the middle of the card
-            const origW = this._pixbuf.get_width();
-            const origH = this._pixbuf.get_height();
-            const scale = Math.max(w / origW, h / origH);
-            const drawW = Math.round(origW * scale);
-            const drawH = Math.round(origH * scale);
-            const drawX = Math.round((w - drawW) / 2);
-            const drawY = Math.round((h - drawH) / 2);
-
-            try {
-                const scaledPixbuf = this._pixbuf.scale_simple(
-                    drawW,
-                    drawH,
-                    GdkPixbuf.InterpType.BILINEAR
-                );
-                if (scaledPixbuf) {
-                    Gdk.cairo_set_source_pixbuf(cr, scaledPixbuf, drawX, drawY);
-                    cr.paint();
-                }
-            } catch (_) {}
-
-            // 3. Subtle Vignette Gradient Overlay:
-            // Top: fades from pitch black (0.94) to ensure title/artist text is 100% readable!
-            // Middle: subtle veil (0.36) so the album cover image is rich and clearly visible!
-            // Bottom: fades to pitch black (0.95) so scrubber, buttons, and volume bar are crystal clear!
+        if (this._bgStyle === 'cover-art') {
+            // Subtle Vignette Gradient Overlay:
+            // Top: fades from pitch black (0.94) to ensure title/artist text is 100% readable
+            // Middle: subtle veil (0.36) so the album cover image is rich and clearly visible
+            // Bottom: fades to pitch black (0.96) so scrubber, buttons, and volume bar are crystal clear
             const pat = new Cairo.LinearGradient(0, 0, 0, h);
             pat.addColorStopRGBA(0.0, 0, 0, 0, 0.94);
             pat.addColorStopRGBA(0.18, 0, 0, 0, 0.72);
@@ -412,9 +370,13 @@ export const CardBackgroundCanvas = GObject.registerClass({
 
             cr.setSource(pat);
             cr.paint();
+        } else {
+            // Solid pitch black base
+            cr.setSourceRGB(0, 0, 0);
+            cr.paint();
         }
 
-        // 4. Subtle 1px Monochrome Keyline Rim Border (Apple Dynamic Island style)
+        // 2. Subtle 1px Monochrome Keyline Rim Border (Apple Dynamic Island style)
         cr.setSourceRGBA(1.0, 1.0, 1.0, 0.15);
         cr.setLineWidth(1.0);
         cr.arc(r, r, r, Math.PI, 1.5 * Math.PI);
@@ -531,7 +493,16 @@ export class IslandCard {
         this._cardContainer.scale_y = 0.94;
         this._cardContainer.translation_y = -8;
 
-        // Layer 1: Background canvas (Album cover with vignette fade & glowing rim)
+        // Layer 0: Hardware-accelerated background cover image widget
+        this._bgCoverBin = new St.Widget({
+            style_class: 'dynamic-island-bg-cover',
+            x_expand: true,
+            y_expand: true,
+        });
+        this._bgCoverBin.style = 'border-radius: 28px; background-color: #000000;';
+        this._cardContainer.add_child(this._bgCoverBin);
+
+        // Layer 1: Background canvas (Vignette fade gradient & glowing rim)
         this._bgCanvas = new CardBackgroundCanvas();
         this._cardContainer.add_child(this._bgCanvas);
 
@@ -784,7 +755,15 @@ export class IslandCard {
         const colorData = this._lastColorData;
         const effectiveStyle = this._enableAmbientGlow ? this._bgStyle : 'black';
 
-        this._bgCanvas.setCover(filePath, colorData, effectiveStyle);
+        if (this._bgCoverBin) {
+            if (effectiveStyle === 'cover-art' && filePath && GLib.file_test(filePath, GLib.FileTest.EXISTS)) {
+                this._bgCoverBin.style = `border-radius: 28px; background-image: url('file://${filePath}'); background-size: cover; background-color: #000000;`;
+            } else {
+                this._bgCoverBin.style = 'border-radius: 28px; background-color: #000000;';
+            }
+        }
+
+        this._bgCanvas.setCover(colorData, effectiveStyle);
 
         if (colorData && colorData.path) {
             this._artBin.style = `background-image: url('file://${colorData.path}'); border: 1px solid rgba(255, 255, 255, 0.15);`;
