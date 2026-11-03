@@ -1,6 +1,6 @@
 {
   "name": "Spotify Dynamic Island",
-  "description": "Apple-inspired Dynamic Island pill and expanded media controller for Spotify and MPRIS players in GNOME Shell, featuring sound-reactive waveforms, live synchronized lyrics, album art vignette backgrounds, and fluid spring animations.",
+  "description": "Apple-inspired Dynamic Island pill and expanded media controller for Spotify and MPRIS players in GNOME Shell, featuring sound-reactive waveforms, live synchronized lyrics, album art vignette backgrounds, and fluid spring animations.\n\nDisclaimer: This extension is an independent community project and is not affiliated with, sponsored, or endorsed by Spotify AB or Apple Inc.",
   "uuid": "spotify-dynamic-island@mayankjain92.github.io",
   "settings-schema": "org.gnome.shell.extensions.spotify-dynamic-island",
   "shell-version": [

@@ -40,3 +40,9 @@ git clone https://github.com/mayankjain92/spotify-dynamic-island.git /tmp/spotif
 ## License
 
 GNU General Public License v3.0 (GPL-3.0). See [LICENSE](LICENSE) for details.
+
+## Disclaimer & Credits
+
+- **Spotify** is a registered trademark of Spotify AB. This extension is an independent open-source project and is not affiliated with, sponsored, or endorsed by Spotify AB.
+- **Dynamic Island** is a design concept popularized by Apple Inc.
+- Lyrics are provided by the free, open-source community API [lrclib.net](https://lrclib.net).
